@@ -45,12 +45,14 @@
         zoomContainer.innerHTML = slides[pictureID];
     }
 
+    // Показ наступного зображення з галереї
     function nextImageInModalWindow() {
         pictureID++;
         if (pictureID >= slides.length) pictureID = 0;
         viewImageInModalWindow();
     }
 
+    // Показ попереднього зображення з галереї
     function prevImageInModalWindow() {
         pictureID--;
         if (pictureID < 0) pictureID = slides.length - 1;
