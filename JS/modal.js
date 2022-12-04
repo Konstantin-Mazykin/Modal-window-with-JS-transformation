@@ -31,9 +31,7 @@
         const pushPictureID = pict.target.id;
         if (pushPictureID === "") return;
         pictureID = parseInt(pushPictureID.slice(4));
-        // Додавання на сторінку вибраного по тапу зображення
-        const zoomContainer = document.querySelector('.modal_window_content');
-        zoomContainer.innerHTML = slides[pictureID];
+        viewImageInModalWindow();
         // Прибирання скролу та фіксація контенту на основній сторінці
         const lockPaddingValue = window.innerWidth - document.querySelector('body').offsetWidth + 'px';
         body.style.paddingRight = lockPaddingValue;
@@ -41,10 +39,28 @@
         body.classList.add('fixed');
     }
 
+    // Додавання на сторінку вибраного по тапу зображення
+    function viewImageInModalWindow() {
+        const zoomContainer = document.querySelector('.modal_window_content');
+        zoomContainer.innerHTML = slides[pictureID];
+    }
+
+    function nextImageInModalWindow() {
+        pictureID++;
+        if (pictureID >= slides.length) pictureID = 0;
+        viewImageInModalWindow();
+    }
+
+    function prevImageInModalWindow() {
+        pictureID--;
+        if (pictureID < 0) pictureID = slides.length - 1;
+        viewImageInModalWindow();
+    }
+
     // Функция закриття модального вікна
     function closeModalWindow() {
         modalLink.classList.remove('open');
-    // Затримка появи полоски скролла
+        // Затримка появи полоски скролла
         setTimeout(function () {
             body.style.paddingRight = '0';
             body.classList.remove('fixed');
@@ -54,6 +70,12 @@
     // Обробник натискання на зображення та виклик функції 
     const selectPicture = document.querySelector('.galery');
     selectPicture.addEventListener('click', openModalWindow);
+
+    const nextButtonInModalWindow = document.querySelector('.modal_window_next');
+    nextButtonInModalWindow.addEventListener('click', nextImageInModalWindow);
+
+    const prevButtonInModalWindow = document.querySelector('.modal_window_prev');
+    prevButtonInModalWindow.addEventListener('click', prevImageInModalWindow);
 
     const closeWindow = document.querySelector('.modal_window_close');
     closeWindow.addEventListener('click', closeModalWindow);
