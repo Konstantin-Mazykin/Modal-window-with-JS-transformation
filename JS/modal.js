@@ -1,5 +1,6 @@
 (() => {
     const modalLink = document.querySelector('.modal_window');
+    const modalContent = document.querySelector('.modal_window_galery');
     const body = document.querySelector('body');
     let currentSlideIdx = 0;
     let pictureID = 0;
@@ -50,7 +51,7 @@
         pictureID++;
         if (pictureID >= slides.length) pictureID = 0;
         viewImageInModalWindow();
-    }
+    }   
 
     // Показ попереднього зображення з галереї
     function prevImageInModalWindow() {
